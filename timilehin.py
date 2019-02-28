@@ -7,7 +7,7 @@ def solve(allPosSlides):
 
     sol = [-1 for i in range(len(allPosSlides))]
     memoTable = [-1 for i in range(len(allPosSlides))]
-
+    done = set()
     def getBest(allPosSlides, i, formerScore):
 
         if memoTable[i] != -1:
@@ -19,12 +19,20 @@ def solve(allPosSlides):
         score = formerScore
         maxScore = score
         for j in range(i, len(allPosSlides) - 1):
+            for photo in allPosSlides[j].Photos:
+                if photo.Id in done:
+                    continue
+            for photo in allPosSlides[j].Photos:
+                done.add(photo.Id)
 
             formerScore += getScore(allPosSlides[i], allPosSlides[j + 1])
             score = getBest(allPosSlides, j, formerScore)
             if score > maxScore:
                 sol[j+1] = i
                 maxScore = score
+
+            for photo in allPosSlides[j].Photos:
+                done.remove(photo.Id)
 
         return maxScore
 
