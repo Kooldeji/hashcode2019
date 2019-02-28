@@ -1,3 +1,5 @@
+from jedd import Photo
+
 
 def inp():
     fname = "a.txt"
