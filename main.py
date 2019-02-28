@@ -1,5 +1,6 @@
 from jedd import Photo, Slide
 from timilehin import solve
+from b70 import gen
 
 
 def inp():
@@ -13,9 +14,9 @@ def inp():
         s = line[0]
         tags = line[2:]
         if s == "H":
-            h_photos.append(Photo(i, s, tags))
+            h_photos.append(Photo(i, s, set(tags)))
         else:
-            v_photos.append(Photo(i, s, tags))
+            v_photos.append(Photo(i, s, set(tags)))
     return v_photos, h_photos
 
 
@@ -27,4 +28,5 @@ def main_solve(h_photos, v_photos):
     solve(slides)
 
 
-main_solve(inp())
+photos = inp()
+main_solve(photos[0], photos[1])
