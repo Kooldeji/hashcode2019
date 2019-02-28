@@ -1,6 +1,4 @@
-
-
-
+from jedd import getScore
 
 
 def solve(allPosSlides):
@@ -26,8 +24,8 @@ def solve(allPosSlides):
                 done.add(photo.Id)
 
             formerScore += getScore(allPosSlides[i], allPosSlides[j + 1])
-            score = getBest(allPosSlides, j, formerScore)
-            if score > maxScore:
+            score = getBest(allPosSlides, j+1, formerScore)
+            if score >= maxScore:
                 sol[j+1] = i
                 maxScore = score
 
@@ -36,11 +34,14 @@ def solve(allPosSlides):
 
         return maxScore
 
+    maxSore = getBest(allPosSlides, 0, 0)
+
     stack = []
-    pos = len(allPosSlides - 1)
+    pos = len(allPosSlides) - 1
     while pos != 0:
         stack.append(allPosSlides[pos])
         pos = sol[pos]
+    stack.append(allPosSlides[0])
     return stack
 
 
