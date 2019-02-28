@@ -41,7 +41,9 @@ class Slide:
         return outs
 
 
-def score(): ...
+def score(s1: 'Slide', s2: 'Slide'):
+    return min(len(s1.Tags.difference(s2.Tags)), len(s2.Tags.difference(s1.Tags)), len(s2.Tags.intersection(s1.Tags)))
+
 
 
 ## testing with inverted index.
