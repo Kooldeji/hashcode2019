@@ -11,7 +11,7 @@ class Photo(object):
         self.Orientation = orientation
         self.Tags = tags
 
-    def __eq__(self, other):
+    def __eq__(self, other: 'Photo'):
         if isinstance(other, Photo):
             return other.Id == self.Id
         return NotImplemented
@@ -27,16 +27,25 @@ class Photo(object):
 
 
 class Slide:
-
-    def __init__(self, photos: list[Photo]):
+    def __init__(self, photos: list):
         self.Photos = photos
+        self.Tags = self.__collate(photos)
 
     def __str__(self):
         return str(self.Photos)
 
+    def __collate(self, ps: list):
+        outs = set()
+        for p in ps:
+            outs.union(p)
+        return outs
+
+
+def score(): ...
+
 
 ## testing with inverted index.
-def fill_index(index: dict[int, set], db: dict):
+def fill_index(index: dict, db: dict):
     # index =  {tag: list[photo]}
     # db = {photo: list[tags]}
     for id in db:
