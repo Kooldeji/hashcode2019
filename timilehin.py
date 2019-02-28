@@ -1,7 +1,8 @@
 
 def solve(allPosSlides):
 
-    def getBest(allPosSlides):
-        pass
+    def getBest(allPosSlides, i):
+
 
     pass
+pass
