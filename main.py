@@ -1,6 +1,7 @@
 from jedd import Photo, Slide
 from timilehin import solve
 from b70 import gen
+from dej import solve1, getTotalScore
 
 
 def inp():
@@ -17,7 +18,18 @@ def inp():
             h_photos.append(Photo(i, s, set(tags)))
         else:
             v_photos.append(Photo(i, s, set(tags)))
-    return v_photos, h_photos
+    return h_photos, v_photos
+
+def out(slides):
+    fname = "out.txt"
+    f = open(fname, "w")
+    print(len(slides), file=f)
+    for slide in slides:
+        p = slide.Photos
+        if len(p) > 1:
+            print(p[0].Id, p[1].Id, file=f)
+        else:
+            print(p[0].Id, file=f)
 
 
 def main_solve(h_photos, v_photos):
@@ -25,9 +37,10 @@ def main_solve(h_photos, v_photos):
     for p in h_photos:
         slides.append(Slide([p]))
     slides.extend(gen(v_photos))
-    return solve(slides)
+    return solve1(slides)
 
 
-photos = inp()
-a = main_solve(photos[0], photos[1])
-print(a)
+slides = inp()
+a = main_solve(slides[0], slides[1])
+print(getTotalScore(a))
+out(a)

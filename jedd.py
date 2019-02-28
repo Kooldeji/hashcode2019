@@ -37,7 +37,7 @@ class Slide:
     def __collate(self, ps: list):
         outs = set()
         for p in ps:
-            outs.union(p)
+            outs.update(p.Tags)
         return outs
 
 
