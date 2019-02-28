@@ -36,7 +36,7 @@ def main_solve(h_photos, v_photos):
     for p in h_photos:
         slides.append(Slide([p]))
     slides.extend(gen(v_photos))
-    return slides
+    return solve(slides)
 
 
 slides = inp()
