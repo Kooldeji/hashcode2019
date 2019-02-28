@@ -19,15 +19,26 @@ def inp():
             v_photos.append(Photo(i, s, set(tags)))
     return v_photos, h_photos
 
+def out(slides):
+    fname = "out.txt"
+    f = open(fname, "w")
+    print(len(slides), file=f)
+    for slide in slides:
+        p = slide.Photos
+        if len(p) > 1:
+            print(p[0].Id, p[1].Id, file=f)
+        else:
+            print(p[0].Id, file=f)
+
 
 def main_solve(h_photos, v_photos):
     slides = []
     for p in h_photos:
         slides.append(Slide([p]))
     slides.extend(gen(v_photos))
-    return solve(slides)
+    return slides
 
 
-photos = inp()
-a = main_solve(photos[0], photos[1])
-print(a)
+slides = inp()
+a = main_solve(slides[0], slides[1])
+out(a)
